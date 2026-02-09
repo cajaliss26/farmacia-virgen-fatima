@@ -57,7 +57,7 @@ input:focus {
 }
 
 button {
-    background: linear-gradient(90deg, #ff4b2b, #ff416c);
+    background: linear-gradient(90deg, #a6f387, #00acca);
     color: white;
     border: none;
     width: 100%;
@@ -70,7 +70,7 @@ button {
 }
 
 button:hover {
-    background: linear-gradient(90deg, #ff6b4a, #ff537b);
+    background: linear-gradient(90deg, #a6f387, #00acca);
     transform: scale(1.02);
 }
 
@@ -98,8 +98,8 @@ footer {
     position: fixed;
     bottom: 0;
     width: 100%;
-    background: #111;
-    color: #bbb;
+    background: #00acca;
+    color: white;
     text-align: center;
     padding: 12px 0;
     font-size: 13px;

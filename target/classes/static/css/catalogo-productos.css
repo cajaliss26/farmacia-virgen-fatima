@@ -5,7 +5,7 @@ body {
 
 /* 🔹 Navbar */
 .navbar {
-    background-color: #212529 !important;
+    background-color: #2eadff !important;
 }
 
 .navbar .nav-link {
@@ -19,7 +19,7 @@ body {
 
 /* 🔹 Botón de carrito */
 .btn-carrito {
-    background: linear-gradient(90deg, #e53935, #ff7043);
+    background: linear-gradient(90deg, #a6f387, #00acca);
     border: none;
     color: #fff;
     border-radius: 8px;
@@ -27,7 +27,7 @@ body {
 }
 
 .btn-carrito:hover {
-    background: linear-gradient(90deg, #d32f2f, #ff5722);
+    background: linear-gradient(90deg, #a6f387, #00acca);
     transform: scale(1.05);
     color: #fff;
 }
@@ -35,7 +35,7 @@ body {
 /* 🔹 Tarjetas de productos */
 .card {
     border-radius: 1rem;
-    border: 1px solid #f1e2b8;
+    border: 1px solid #befff7;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -67,7 +67,7 @@ body {
 }
 
 .btn-outline-primary:hover {
-    background: linear-gradient(90deg, #e53935, #ff7043);
+    background: linear-gradient(90deg, #a6f387, #00acca);
     color: #fff;
     border: none;
     transform: scale(1.03);
@@ -81,8 +81,8 @@ body {
 
 /* 🔹 Footer */
 footer {
-    background-color: #212529;
+    background-color: #00acca;
     font-size: 0.9rem;
-    color: #aaa;
+    color: white;
     letter-spacing: 0.3px;
 }

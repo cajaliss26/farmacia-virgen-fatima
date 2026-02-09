@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!token || isTokenExpirado(token)) {
         navLinks.innerHTML = `
             <li class="nav-item"><a class="nav-link text-light" href="/">Inicio</a></li>
-            <li class="nav-item"><a class="nav-link text-light" href="/dashboard-admin/productos">Productos</a></li>
+            <li class="nav-item"><a class="nav-link text-light" href="/dashboard-admin/productos">Nuestros productos</a></li>
             <li class="nav-item"><a class="nav-link text-light" href="/dashboard-admin/sucursales">Sucursales</a></li>
             <li class="nav-item"><a class="nav-link text-light" href="/dashboard-admin/reportes">Reportes</a></li>
             <li class="nav-item ms-2"><a href="/login" class="btn btn-outline-light btn-sm">Iniciar sesión</a></li>
@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     navLinks.innerHTML = `
         <li class="nav-item"><a class="nav-link text-light" href="/">Inicio</a></li>
-        <li class="nav-item"><a class="nav-link text-light" href="/dashboard-admin/productos">Productos</a></li>
+        <li class="nav-item"><a class="nav-link text-light" href="/dashboard-admin/productos">Nuestros productos</a></li>
         <li class="nav-item"><a class="nav-link text-light" href="/dashboard-admin/sucursales">Sucursales</a></li>
         <li class="nav-item"><a class="nav-link text-light" href="/dashboard-admin/reportes">Reportes</a></li>
         <li class="nav-item dropdown ms-3">

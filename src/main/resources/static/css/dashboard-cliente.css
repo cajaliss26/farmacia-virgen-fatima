@@ -4,7 +4,7 @@ body {
 }
 
 .navbar {
-    background-color: #2c2c2c;
+    background-color: #00acca;
     padding: 10px 0;
     box-shadow: 0 2px 5px rgba(0,0,0,0.3);
 }
@@ -36,7 +36,7 @@ body {
     content: "";
     position: absolute;
     inset: 0;
-    background: rgba(0,0,0,0.4); /* oscurece la imagen */
+    background: rgba(0,0,0,0.2); /*  baja opacidad de la imagen */
     z-index: 1;
 }
 
@@ -46,9 +46,9 @@ body {
     z-index: 2;
 }
 
-/* ====== BOTÓN VER CATÁLOGO COMPLETO ====== */
+/* ====== BOTÓN VER MEDICAMENTOS Y PRODUCTOS ====== */
 .catalogo-btn {
-    background-color: #b91c1c;
+    background-color: #1F3A8A;
     border: none;
     color: #fff;
     font-weight: 600;
@@ -60,31 +60,31 @@ body {
 }
 
 .catalogo-btn:hover {
-    background-color: #8b1313;
+    background-color: #0B3D91;
     transform: translateY(-2px);
 }
 
 .catalogo-btn:active {
-    background-color: #6d0f0f;
+    background-color: #0B3D91;
     transform: scale(0.97);
 }
 
 /* Sección */
 .section-title {
     font-weight: bold;
-    color: #2e2e2e;
+    color: #2c2c2c;
 }
 
 /* Footer */
 footer {
-    background-color: #1e1e1e;
+    background-color: #00acca;
     color: #ddd;
     padding: 40px 0;
     text-align: center;
 }
 
 footer a {
-    color: #f8d37d;
+    color: #a6f387;
     text-decoration: none;
 }
 

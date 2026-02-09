@@ -4,9 +4,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.olcese</groupId>
-  <artifactId>panaderia-olcese</artifactId>
+  <artifactId>farmacia-fatima</artifactId>
   <version>1.0.0</version>
-  <name>Panaderia Olcese</name>
+  <name>Farmacia VIRGEN DE FATIMA</name>
   <description>Migración de JSP/Servlets a Spring Boot 3 + Thymeleaf</description>
   <properties>
     <java.version>21</java.version>

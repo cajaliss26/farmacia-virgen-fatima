@@ -20,7 +20,7 @@ body {
 
 /* --- Botón cálido --- */
 .register-btn {
-    background: linear-gradient(90deg, #ff6b4a, #ff3d6a);
+    background: linear-gradient(90deg, #a6f387, #00acca);
     border: none;
     padding: 10px 0;
     border-radius: 8px;
@@ -30,7 +30,7 @@ body {
 }
 
 .register-btn:hover {
-    background: linear-gradient(90deg, #ff3d6a, #ff6b4a);
+    background: linear-gradient(90deg, #a6f387, #00acca);
     box-shadow: 0 4px 10px rgba(255, 80, 80, 0.35);
     transform: scale(1.02);
 }
@@ -43,7 +43,7 @@ body {
 
 /* --- Footer --- */
 .footer {
-    background-color: #000;
+    background-color: #00acca;
     color: white;
     font-size: 0.9rem;
     text-align: center;
