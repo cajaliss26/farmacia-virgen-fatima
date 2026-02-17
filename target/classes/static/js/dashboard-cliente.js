@@ -1,7 +1,12 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const navLinks = document.getElementById("nav-links");
 
-    const token = localStorage.getItem("token");
+document.addEventListener("DOMContentLoaded", () => {
+   // const navLinks = document.getElementById("nav-links");
+
+    const navLinks = document.getElementById("nav-links");
+    if (!navLinks) return; // 👈 si no existe, salimos sin romper
+
+    const token = localStorage.getItem("accessToken") || localStorage.getItem("token");
+    //const token = localStorage.getItem("token");
     const nombre = localStorage.getItem("nombre");
     const apellido = localStorage.getItem("apellido");
     const rol = localStorage.getItem("rol");
@@ -58,3 +63,8 @@ function isTokenExpirado(token) {
         return true;
     }
 }
+
+
+
+
+

@@ -4,7 +4,7 @@ body {
 }
 
 .navbar {
-    background-color: #212529 !important;
+    background-color: #00acca !important;
 }
 
 .navbar .nav-link {
@@ -29,7 +29,7 @@ body {
 }
 
 .btn-olcese {
-    background: linear-gradient(90deg, #e53935, #ff7043); /* 🔥 medio rojo */
+    background: linear-gradient(90deg, #a6f387, #00acca); /* 🔥 medio rojo */
     border: none;
     color: #fff;
     border-radius: 8px;
@@ -37,7 +37,7 @@ body {
 }
 
 .btn-olcese:hover {
-    background: linear-gradient(90deg, #d32f2f, #ff5722);
+    background: linear-gradient(90deg, #a6f387, #00acca);
     transform: scale(1.05);
 }
 
@@ -48,7 +48,8 @@ body {
 }
 
 footer {
+    background-color: #00acca;
     font-size: 0.9rem;
-    color: #aaa;
+    color: white;
     letter-spacing: 0.3px;
 }

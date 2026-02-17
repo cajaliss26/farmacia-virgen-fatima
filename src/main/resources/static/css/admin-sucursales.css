@@ -5,7 +5,7 @@ body {
 
 /* 🔹 Navbar */
 .navbar {
-    background-color: #212529 !important;
+    background-color: #063874 !important;
 }
 
 .navbar .nav-link {
@@ -58,8 +58,8 @@ body {
 
 /* 🔹 Footer */
 footer {
-    background-color: #212529;
+    background-color: #063874;
     font-size: 0.9rem;
-    color: #aaa;
+    color: white;
     letter-spacing: 0.3px;
 }

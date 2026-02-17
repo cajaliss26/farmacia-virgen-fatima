@@ -6,6 +6,9 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 
 @Entity @Table(name = "carritos")
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
@@ -26,9 +29,16 @@ public class Carrito {
     @Column(precision = 10, scale = 2, nullable = false)
     private BigDecimal total = BigDecimal.ZERO;
 
-    private LocalDateTime creadoEn = LocalDateTime.now();
-    private LocalDateTime actualizadoEn = LocalDateTime.now();
+   // private LocalDateTime creadoEn = LocalDateTime.now();
+   // private LocalDateTime actualizadoEn = LocalDateTime.now();
+    // @PreUpdate
+    // public void preUpdate(){ actualizadoEn = LocalDateTime.now(); }
+    @CreationTimestamp
+    @Column(nullable = false, updatable = false)
+    private LocalDateTime creadoEn;
 
-    @PreUpdate
-    public void preUpdate(){ actualizadoEn = LocalDateTime.now(); }
+    @UpdateTimestamp
+    @Column(nullable = false)
+    private LocalDateTime actualizadoEn;
+
 }

@@ -5,8 +5,42 @@ const API_CATALOGO = "/api/catalogo/productos";
 const API_CARRITO_ADD = "/api/carrito/add";
 
 // token JWT guardado por tu login.js
-const getToken = () => localStorage.getItem("accessToken");
-const isLogged = () => !!getToken();
+//const getToken = () => localStorage.getItem("accessToken");
+//const isLogged = () => !!getToken();
+// ===============================
+// 🔐 Helpers de autenticación
+// ===============================
+function getToken() {
+  return localStorage.getItem("accessToken") || localStorage.getItem("token");
+}
+
+// REFORZANDO IS LOGGED
+function isTokenExpirado(token) {
+  try {
+    const payload = JSON.parse(atob(token.split(".")[1]));
+    return Date.now() >= payload.exp * 1000;
+  } catch (e) {
+    return true;
+  }
+}
+
+function isLogged() {
+  const t = getToken();
+  if (!t) return false;
+
+  if (isTokenExpirado(t)) {
+    localStorage.removeItem("token");
+    localStorage.removeItem("accessToken");
+    return false;
+  }
+  return true;
+}
+/*
+function isLogged() {
+
+  return !!getToken();
+}
+*/
 
 // Wrapper para fetch con auth (cuando hay token)
 const apiFetch = (url, opts = {}) => {
@@ -40,7 +74,7 @@ function listarProductos() {
         contenedor.innerHTML = `<p class="text-center text-muted">No hay productos disponibles.</p>`;
         return;
       }
-
+      const logged = isLogged();
       productos.forEach((p) => {
         const col = document.createElement("div");
         col.className = "col-md-4 col-lg-3";
@@ -64,7 +98,7 @@ function listarProductos() {
                 <button class="btn btn-outline-primary w-100" data-id="${p.id}">
                   <i class="bi bi-cart-plus"></i> Agregar al carrito
                 </button>
-                ${!isLogged() ? `<small class="text-muted d-block mt-1">Inicia sesión para guardar tu compra en la cuenta</small>` : ""}
+                ${!logged ? `<small class="text-muted d-block mt-1">Inicia sesión para guardar tu compra en la cuenta</small>` : ""}
               </div>
             </div>
           </div>`;
@@ -73,13 +107,13 @@ function listarProductos() {
       });
 
       // listeners "Agregar"
-      contenedor.querySelectorAll("button[data-id]").forEach((btn) => {
+      /*contenedor.querySelectorAll("button[data-id]").forEach((btn) => {
         btn.addEventListener("click", async (e) => {
           const id = Number(e.currentTarget.dataset.id);
           const qty = Math.max(1, Number(document.getElementById(`qty-${id}`)?.value || 1));
 
           // a) logueado → API backend
-          if (isLogged()) {
+          /* if (isLogged()) {
             try {
               const r = await apiFetch(API_CARRITO_ADD, {
                 method: "POST",
@@ -88,19 +122,75 @@ function listarProductos() {
               if (!r.ok) throw new Error(await r.text());
               mostrarAlerta("🧺 Producto agregado al carrito ✅", "success");
             } catch (err) {
-              console.error(err);
-              mostrarAlerta("No se pudo agregar al carrito", "danger");
+              console.error("❌ Add carrito error:", err);
+              mostrarAlerta(`No se pudo agregar al carrito: ${String(err).slice(0,120)}`, "danger");
             } finally {
-              actualizarBadgeCarrito(true); // fuerza recálculo desde backend si implementas el conteo por API
+              actualizarBadgeCarrito(true);
             }
           } else {
             // b) invitado → localStorage
             agregarLocalStorage(id, qty, productos.find((x) => x.id === id));
             mostrarAlerta("🧺 Producto agregado al carrito (invitado) ✅", "success");
             actualizarBadgeCarrito();
-          }
-        });
+          }*/
+
+      /*
+              if (isLogged()) {
+                try {
+                  const userId = Number(localStorage.getItem("userId"));
+
+                  const r = await apiFetch(API_CARRITO_ADD, {
+                    method: "POST",
+                    body: JSON.stringify({ usuarioId: userId, productoId: id, cantidad: qty }),
+                  });
+
+                  if (!r.ok) throw new Error(await r.text());
+                  mostrarAlerta("🧺 Producto agregado al carrito ✅", "success");
+                } catch (err) {
+                  console.error("❌ Add carrito error:", err);
+                  mostrarAlerta(`No se pudo agregar al carrito: ${String(err).slice(0,120)}`, "danger");
+                } finally {
+                  actualizarBadgeCarrito(true);
+                }
+              }
+
+        }
+        );
       });
+    }); */
+contenedor.querySelectorAll("button[data-id]").forEach((btn) => {
+  btn.addEventListener("click", async (e) => {
+    const id = Number(e.currentTarget.dataset.id);
+    const qty = Math.max(1, Number(document.getElementById(`qty-${id}`)?.value || 1));
+
+    // ✅ Si NO está logueada → localStorage
+    if (!isLogged()) {
+      agregarLocalStorage(id, qty, productos.find((x) => x.id === id));
+      mostrarAlerta("🧺 Producto agregado al carrito (invitado) ✅", "success");
+      actualizarBadgeCarrito();
+      return;
+    }
+
+    // ✅ Si está logueada → backend
+    try {
+      const userId = Number(localStorage.getItem("userId"));
+
+      const r = await apiFetch(API_CARRITO_ADD, {
+        method: "POST",
+        body: JSON.stringify({ productoId: id, cantidad: qty })
+        //body: JSON.stringify({ usuarioId: userId, productoId: id, cantidad: qty }),
+      });
+
+      if (!r.ok) throw new Error(await r.text());
+      mostrarAlerta("🧺 Producto agregado al carrito ✅", "success");
+    } catch (err) {
+      console.error("❌ Add carrito error:", err);
+      mostrarAlerta(`No se pudo agregar al carrito: ${String(err).slice(0,120)}`, "danger");
+    } finally {
+      actualizarBadgeCarrito(true);
+    }
+  });
+});
     })
     .catch((err) => {
       console.error("❌ Error al cargar productos:", err);
@@ -137,9 +227,13 @@ async function fusionarCarritoInvitadoALogueado() {
 
   for (const it of invitado) {
     try {
+
+      const userId = Number(localStorage.getItem("userId"));
       const r = await apiFetch(API_CARRITO_ADD, {
         method: "POST",
-        body: JSON.stringify({ productoId: it.id, cantidad: it.cantidad }),
+
+        body: JSON.stringify({ usuarioId: userId, productoId: it.id, cantidad: it.cantidad }),
+       // body: JSON.stringify({ productoId: it.id, cantidad: it.cantidad }),
       });
       if (!r.ok) console.warn("No se pudo fusionar item:", await r.text());
     } catch (e) {

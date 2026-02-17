@@ -67,6 +67,7 @@ com\olcese\panaderia\repository\ReservaRepository.class
 com\olcese\panaderia\model\PasswordGenerator.class
 com\olcese\panaderia\model\dto\ReservaRequest.class
 com\olcese\panaderia\model\Categoria$CategoriaBuilder.class
+com\olcese\panaderia\model\bcryptlogin.class
 com\olcese\panaderia\model\dto\SucursalRequest.class
 com\olcese\panaderia\service\Impl\JwtTokenServiceImpl.class
 com\olcese\panaderia\config\security\SecurityConfig.class

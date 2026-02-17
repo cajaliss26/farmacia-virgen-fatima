@@ -20,7 +20,7 @@ body {
 
 /* --- Botón cálido --- */
 .register-btn {
-    background: linear-gradient(90deg, #a6f387, #00acca);
+    background: linear-gradient(90deg, #00acca, #063874);
     border: none;
     padding: 10px 0;
     border-radius: 8px;
@@ -30,7 +30,7 @@ body {
 }
 
 .register-btn:hover {
-    background: linear-gradient(90deg, #a6f387, #00acca);
+    background: linear-gradient(90deg, #00acca, #063874);
     box-shadow: 0 4px 10px rgba(255, 80, 80, 0.35);
     transform: scale(1.02);
 }

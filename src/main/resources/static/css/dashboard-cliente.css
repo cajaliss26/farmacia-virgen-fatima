@@ -48,10 +48,10 @@ body {
 
 /* ====== BOTÓN VER MEDICAMENTOS Y PRODUCTOS ====== */
 .catalogo-btn {
-    background-color: #1F3A8A;
+    background: linear-gradient(90deg, #00acca, #063874 );
     border: none;
     color: #fff;
-    font-weight: 600;
+    font-weight: 800;
     cursor: pointer;
     padding: 12px 28px;
     border-radius: 6px;
@@ -60,12 +60,13 @@ body {
 }
 
 .catalogo-btn:hover {
-    background-color: #0B3D91;
-    transform: translateY(-2px);
+    background: linear-gradient(90deg, #063874, #00acca);
+    transform: scale(1.05);
+    color: #fff;
 }
 
 .catalogo-btn:active {
-    background-color: #0B3D91;
+    background-color: #ffffff;
     transform: scale(0.97);
 }
 
@@ -81,11 +82,13 @@ footer {
     color: #ddd;
     padding: 40px 0;
     text-align: center;
+    font-weight: bold;
 }
 
 footer a {
-    color: #a6f387;
+    color: #31469e;
     text-decoration: none;
+    font-weight: bold;
 }
 
 footer a:hover {

@@ -35,7 +35,7 @@ public class CarritoServiceImpl implements CarritoService {
 
     @Override
     public CarritoResponse obtenerCarritoActual(Long usuarioId) {
-        Carrito c = carritoRepo.findByUsuarioIdAndActivoTrue(usuarioId)
+        Carrito c = carritoRepo.findFirstByUsuario_IdAndActivoTrueOrderByIdDesc(usuarioId)
                 .orElseGet(() -> crearCarrito(usuarioId));
         recalcularTotal(c);
         return toResponse(c);
@@ -46,7 +46,7 @@ public class CarritoServiceImpl implements CarritoService {
         if (req.cantidad() == null || req.cantidad() <= 0) {
             throw new RuntimeException("Cantidad inválida");
         }
-        Carrito c = carritoRepo.findByUsuarioIdAndActivoTrue(usuarioId)
+        Carrito c = carritoRepo.findFirstByUsuario_IdAndActivoTrueOrderByIdDesc(usuarioId)
                 .orElseGet(() -> crearCarrito(usuarioId));
 
         Producto p = productoRepo.findById(req.productoId())
@@ -90,7 +90,7 @@ public class CarritoServiceImpl implements CarritoService {
         if (req.cantidad() == null || req.cantidad() <= 0) {
             throw new RuntimeException("Cantidad inválida");
         }
-        Carrito c = carritoRepo.findByUsuarioIdAndActivoTrue(usuarioId)
+        Carrito c = carritoRepo.findFirstByUsuario_IdAndActivoTrueOrderByIdDesc(usuarioId)
                 .orElseThrow(() -> new RuntimeException("No hay carrito activo"));
 
         CarritoItem it = c.getItems().stream()
@@ -107,7 +107,7 @@ public class CarritoServiceImpl implements CarritoService {
 
     @Override
     public CarritoResponse quitarItem(Long usuarioId, Long itemId) {
-        Carrito c = carritoRepo.findByUsuarioIdAndActivoTrue(usuarioId)
+        Carrito c = carritoRepo.findFirstByUsuario_IdAndActivoTrueOrderByIdDesc(usuarioId)
                 .orElseThrow(() -> new RuntimeException("No hay carrito activo"));
         boolean removed = c.getItems().removeIf(it -> it.getId().equals(itemId));
         if (!removed) throw new RuntimeException("Item no encontrado");
@@ -118,7 +118,7 @@ public class CarritoServiceImpl implements CarritoService {
 
     @Override
     public void vaciar(Long usuarioId) {
-        Carrito c = carritoRepo.findByUsuarioIdAndActivoTrue(usuarioId)
+        Carrito c = carritoRepo.findFirstByUsuario_IdAndActivoTrueOrderByIdDesc(usuarioId)
                 .orElseThrow(() -> new RuntimeException("No hay carrito activo"));
         c.getItems().clear();
         c.setTotal(BigDecimal.ZERO);
@@ -127,7 +127,7 @@ public class CarritoServiceImpl implements CarritoService {
 
     @Override
     public Long checkout(Long usuarioId) {
-        Carrito c = carritoRepo.findByUsuarioIdAndActivoTrue(usuarioId)
+        Carrito c = carritoRepo.findFirstByUsuario_IdAndActivoTrueOrderByIdDesc(usuarioId)
                 .orElseThrow(() -> new RuntimeException("No hay carrito activo"));
 
         if (c.getItems().isEmpty()) {

@@ -31,7 +31,11 @@ document.addEventListener("DOMContentLoaded", () => {
             console.log("✅ Login exitoso:", data);
 
             // Guardar datos en localStorage
+            //localStorage.setItem("token", data.accessToken);
+            //localStorage.removeItem("token"); junto al debajo se pusieron después
+            //localStorage.setItem("accessToken", data.accessToken);
             localStorage.setItem("token", data.accessToken);
+            console.log("✅ accessToken guardado:", localStorage.getItem("accessToken"));
             localStorage.setItem("nombre", data.nombre);
             localStorage.setItem("apellido", data.apellido);
             localStorage.setItem("rol", data.rol);
@@ -51,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (data.rol === "ADMIN") {
                 window.location.href = "/dashboard-admin";
             } else if (data.rol === "CLIENTE") {
-                window.location.href = "/dashboard-cliente";
+                window.location.href = "/dashboard-cliente/productos";
             }
 
         } catch (error) {

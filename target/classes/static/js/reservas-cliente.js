@@ -32,9 +32,9 @@ document.addEventListener("DOMContentLoaded", () => {
   cargarSucursales();
 
   const form = document.getElementById("formReserva");
-  const inputPersonas = document.getElementById("numPersonas");
-
-  inputPersonas?.addEventListener("input", calcularTotal);
+  //const inputPersonas = document.getElementById("numPersonas");
+  //const inputPersonas = document.getElementById("fechaReserva")
+  //inputPersonas?.addEventListener("input");
   form?.addEventListener("submit", registrarReserva);
 });
 
@@ -61,11 +61,11 @@ function cargarSucursales() {
 // ==============================
 // Total (solo UI, el backend recalcula)
 // ==============================
-function calcularTotal() {
-  const personas = parseInt(document.getElementById("numPersonas").value) || 0;
-  const total = personas * 4; // S/ 4 por persona (informativo)
-  document.getElementById("total").value = total.toFixed(2);
-}
+//function calcularTotal() {
+//  const personas = parseInt(document.getElementById("numPersonas").value) || 0;
+//  const total = personas * 4; // S/ 4 por persona (informativo)
+//  document.getElementById("total").value = total.toFixed(2);
+//}
 
 // ==============================
 // Registrar reserva
@@ -74,12 +74,12 @@ function registrarReserva(e) {
   e.preventDefault();
 
   const sucursalId = document.getElementById("sucursalSelect").value;
-  const numeroPersonas = document.getElementById("numPersonas").value;
+  //const numeroPersonas = document.getElementById("numPersonas").value;
   const fechaReserva = document.getElementById("fechaReserva").value; // yyyy-MM-dd
   const horaInicio = document.getElementById("horaReserva").value;    // HH:mm (inicio)
   const horaFin = document.getElementById("horaFin")?.value;          // HH:mm (fin)
 
-  if (!sucursalId || !numeroPersonas || !fechaReserva || !horaInicio || !horaFin) {
+  if (!sucursalId  || !fechaReserva || !horaInicio || !horaFin) {
     mostrarAlerta("Por favor complete todos los campos.", "danger");
     return;
   }
@@ -99,15 +99,15 @@ function registrarReserva(e) {
       sucursalId: parseInt(sucursalId),
       fechaReserva,              // LocalDate (ISO)
       horaInicio,                // LocalTime (HH:mm)
-      horaFin,                   // LocalTime (HH:mm)
-      numeroPersonas: parseInt(numeroPersonas)
+      horaFin                  // LocalTime (HH:mm)
+      //numeroPersonas: parseInt(numeroPersonas)
     })
   })
       .then(res => res.ok ? res.json() : res.text().then(t => Promise.reject(t)))
       .then(() => {
         mostrarAlerta("✅ Reserva registrada exitosamente.", "success");
         document.getElementById("formReserva").reset();
-        document.getElementById("total").value = "";
+        //document.getElementById("total").value = "";
       })
       .catch(err => {
         console.error("Error reserva:", err);

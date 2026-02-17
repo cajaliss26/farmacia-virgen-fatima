@@ -1,3 +1,8 @@
+
+
+
+
+
 document.addEventListener("DOMContentLoaded", () => {
 
     const navLinks = document.getElementById("nav-links");
@@ -55,3 +60,5 @@ function isTokenExpirado(token) {
         return true;
     }
 }
+
+

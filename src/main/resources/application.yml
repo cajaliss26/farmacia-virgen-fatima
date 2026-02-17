@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/bd_olcese_mvp?useSSL=false&serverTimezone=America/Lima&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://localhost:3306/bd_farmaciavf?useSSL=false&serverTimezone=America/Lima&allowPublicKeyRetrieval=true
     username: root
     password: admin
     driver-class-name: com.mysql.cj.jdbc.Driver

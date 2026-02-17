@@ -65,7 +65,8 @@ function render(items) {
       (typeof it.producto === "object" ? it.producto.id : undefined);
 
     const nombre =
-      it.productoNombre ??
+        it.nombreProducto ??
+        it.productoNombre ??
       it.nombre ??
       (typeof it.producto === "object" ? it.producto.nombre : "Producto");
 

@@ -5,7 +5,7 @@ body {
 
 /* 🔹 Navbar */
 .navbar {
-    background-color: #2eadff !important;
+    background-color: #00acca !important;
 }
 
 .navbar .nav-link {
@@ -19,15 +19,15 @@ body {
 
 /* 🔹 Botón de carrito */
 .btn-carrito {
-    background: linear-gradient(90deg, #a6f387, #00acca);
-    border: none;
+    background: linear-gradient(90deg, #ff4934, #ec2615);
+    border: #f63929;
     color: #fff;
     border-radius: 8px;
     transition: all 0.3s ease;
 }
 
 .btn-carrito:hover {
-    background: linear-gradient(90deg, #a6f387, #00acca);
+    background: linear-gradient(90deg, #b81717, #950606);
     transform: scale(1.05);
     color: #fff;
 }
@@ -60,14 +60,14 @@ body {
 
 /* 🔹 Botón de agregar al carrito */
 .btn-outline-primary {
-    border-radius: 8px;
+    border-radius: 10px;
     border-color: #d32f2f;
     color: #d32f2f;
     transition: all 0.3s ease;
 }
 
 .btn-outline-primary:hover {
-    background: linear-gradient(90deg, #a6f387, #00acca);
+    background: linear-gradient(90deg, #00acca, #063874);
     color: #fff;
     border: none;
     transform: scale(1.03);
@@ -79,6 +79,22 @@ body {
     margin: 0 auto;
 }
 
+.btn-seguir-outline {
+    border: 2px solid #063874;
+    background:#063874 ;
+    color: white;
+    border-radius: 8px;
+    padding: 6px 18px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-seguir-outline:hover {
+    border: 1px solid #878080;
+    background: white;
+    color: #063874;
+    transform: scale(1.03);
+}
 /* 🔹 Footer */
 footer {
     background-color: #00acca;
