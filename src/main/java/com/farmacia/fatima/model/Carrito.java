@@ -29,10 +29,7 @@ public class Carrito {
     @Column(precision = 10, scale = 2, nullable = false)
     private BigDecimal total = BigDecimal.ZERO;
 
-   // private LocalDateTime creadoEn = LocalDateTime.now();
-   // private LocalDateTime actualizadoEn = LocalDateTime.now();
-    // @PreUpdate
-    // public void preUpdate(){ actualizadoEn = LocalDateTime.now(); }
+
     @CreationTimestamp
     @Column(nullable = false, updatable = false)
     private LocalDateTime creadoEn;

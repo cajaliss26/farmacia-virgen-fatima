@@ -32,16 +32,8 @@ public class CarritoController {
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"))
                 .getId();
     }
-    /*
-    private Long userId(Authentication auth){
-        String email = ((UserDetails) auth.getPrincipal()).getUsername();
-        return usuarioRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"))
-                .getId();
-    }
 
 
-     */
     @GetMapping
     public ResponseEntity<CarritoResponse> obtener(Authentication auth){
         return ResponseEntity.ok(service.obtenerCarritoActual(userId(auth)));
