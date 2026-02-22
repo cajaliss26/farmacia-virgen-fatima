@@ -27,23 +27,18 @@ public class Reserva {
     private Sucursal sucursal;
 
     @Column(name = "fecha_reserva", nullable = false)
-    private LocalDate fechaReserva; // 📅 fecha elegida por el cliente
+    private LocalDate fechaReserva;
 
     @Column(name = "hora_inicio", nullable = false)
-    private LocalTime horaInicio; // ⏰ hora de inicio
+    private LocalTime horaInicio;
 
     @Column(name = "hora_fin", nullable = false)
-    private LocalTime horaFin; // ⏰ hora de fin
+    private LocalTime horaFin;
 
-    @Column(name = "numero_personas", nullable = false)
-    private Integer numeroPersonas;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
     private EstadoReserva estado = EstadoReserva.PENDIENTE;
-
-    @Column(precision = 10, scale = 2)
-    private BigDecimal total;
 
     public enum EstadoReserva {
         PENDIENTE,

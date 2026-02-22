@@ -14,7 +14,5 @@ public record ReservaResponse(
         LocalDate fechaReserva,
         LocalTime horaInicio,
         LocalTime horaFin,
-        Integer numeroPersonas,
-        String estado,
-        BigDecimal total
+        String estado
 ) {}

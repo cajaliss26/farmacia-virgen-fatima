@@ -13,10 +13,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-/**
- * Controlador REST para gestión de reservas
- * Requiere autenticación (JWT)
- */
 @RestController
 @RequestMapping("/api/reservas")
 @CrossOrigin(origins = "*")
@@ -31,11 +27,7 @@ public class ReservaController {
         this.usuarioRepository = usuarioRepository;
     }
     
-    /**
-     * POST /api/reservas
-     * Crear una nueva reserva
-     * Acceso: CLIENTE autenticado
-     */
+
     @PostMapping
     public ResponseEntity<?> crearReserva(
             @Valid @RequestBody ReservaRequest request,
@@ -55,24 +47,14 @@ public class ReservaController {
                     .body("Error al crear reserva: " + e.getMessage());
         }
     }
-    
-    /**
-     * GET /api/reservas/mis-reservas
-     * Obtener todas las reservas del usuario autenticado
-     * Acceso: CLIENTE autenticado
-     */
+
     @GetMapping("/mis-reservas")
     public ResponseEntity<List<ReservaResponse>> obtenerMisReservas(Authentication authentication) {
         Long usuarioId = obtenerUsuarioIdDesdeAuth(authentication);
         List<ReservaResponse> reservas = reservaService.obtenerReservasUsuario(usuarioId);
         return ResponseEntity.ok(reservas);
     }
-    
-    /**
-     * GET /api/reservas/{id}
-     * Obtener una reserva específica
-     * Acceso: Dueño de la reserva o ADMIN
-     */
+
     @GetMapping("/{id}")
     public ResponseEntity<?> obtenerReserva(
             @PathVariable Long id,
@@ -96,11 +78,7 @@ public class ReservaController {
         }
     }
     
-    /**
-     * PATCH /api/reservas/{id}/cancelar
-     * Cancelar una reserva
-     * Acceso: Dueño de la reserva
-     */
+
     @PatchMapping("/{id}/cancelar")
     public ResponseEntity<?> cancelarReserva(
             @PathVariable Long id,
@@ -117,12 +95,7 @@ public class ReservaController {
                     .body("Error al cancelar reserva: " + e.getMessage());
         }
     }
-    
-    /**
-     * GET /api/reservas/admin/todas
-     * Listar TODAS las reservas del sistema
-     * Acceso: Solo ADMIN
-     */
+
     @GetMapping("/admin/todas")
     public ResponseEntity<?> listarTodasLasReservas(Authentication authentication) {
         // Validar que es admin
@@ -136,23 +109,16 @@ public class ReservaController {
     }
     
     // ========== MÉTODOS AUXILIARES ==========
-    
-    /**
-     * Extrae el ID del usuario desde el objeto Authentication (JWT)
-     */
+
     private Long obtenerUsuarioIdDesdeAuth(Authentication authentication) {
-        // El email está en el subject del JWT
+        // El email está subject del JWT
         String email = ((UserDetails) authentication.getPrincipal()).getUsername();
-        
-        // Buscar el usuario por email
+
         return usuarioRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"))
                 .getId();
     }
-    
-    /**
-     * Verifica si el usuario autenticado tiene rol ADMIN
-     */
+
     private boolean esAdmin(Authentication authentication) {
         return authentication.getAuthorities().stream()
                 .anyMatch(a -> a.getAuthority().equalsIgnoreCase("ROLE_ADMIN"));

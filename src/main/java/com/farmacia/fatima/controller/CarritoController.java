@@ -27,7 +27,7 @@ public class CarritoController {
     }
 
     private Long userId(Authentication auth){
-        String email = auth.getName(); // ✅
+        String email = auth.getName();
         return usuarioRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"))
                 .getId();

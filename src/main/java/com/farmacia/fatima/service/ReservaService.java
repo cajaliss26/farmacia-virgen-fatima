@@ -5,10 +5,6 @@ import com.farmacia.fatima.model.dto.ReservaResponse;
 
 import java.util.List;
 
-/**
- * Interfaz del servicio de reservas
- * Define los métodos para gestionar reservas de clientes
- */
 public interface ReservaService {
     
     // Crear una nueva reserva

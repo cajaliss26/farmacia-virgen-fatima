@@ -10,10 +10,8 @@ import java.util.List;
 
 public interface PedidoRepository extends JpaRepository<Pedido, Long> {
 
-    // 🟢 Ya existente: pedidos de un usuario
     List<Pedido> findByUsuarioIdOrderByCreadoEnDesc(Long usuarioId);
 
-    // 📊 --- NUEVAS CONSULTAS PARA REPORTES ---
 
     @Query("""
     select date(p.creadoEn) as fecha, sum(p.total) as total

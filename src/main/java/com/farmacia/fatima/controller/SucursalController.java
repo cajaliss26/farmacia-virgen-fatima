@@ -23,7 +23,7 @@ public class SucursalController {
         this.service = service;
     }
 
-    // GET /api/sucursales - Listar todas
+    // GET
     @GetMapping
     public ResponseEntity<List<SucursalResponse>> listar() {
         List<SucursalResponse> lista = service.listar().stream()
@@ -32,7 +32,7 @@ public class SucursalController {
         return ResponseEntity.ok(lista);
     }
 
-    // GET /api/sucursales/{id} - Buscar por ID
+    // GET
     @GetMapping("/{id}")
     public ResponseEntity<?> buscarPorId(@PathVariable Long id) {
         try {
@@ -43,7 +43,7 @@ public class SucursalController {
         }
     }
 
-    // POST /api/sucursales - Solo admin
+    // POST
     @PostMapping
     public ResponseEntity<?> crear(@RequestBody SucursalRequest req, Authentication auth) {
         if (!tieneRolAdmin(auth)) {
@@ -58,7 +58,7 @@ public class SucursalController {
         }
     }
 
-    // PUT /api/sucursales/{id} - Solo admin
+    // PUT
     @PutMapping("/{id}")
     public ResponseEntity<?> actualizar(@PathVariable Long id, @RequestBody SucursalRequest req, Authentication auth) {
         if (!tieneRolAdmin(auth)) {
@@ -73,7 +73,7 @@ public class SucursalController {
         }
     }
 
-    // DELETE /api/sucursales/{id} - Solo admin
+    // DELETE
     @DeleteMapping("/{id}")
     public ResponseEntity<?> eliminar(@PathVariable Long id, Authentication auth) {
         if (!tieneRolAdmin(auth)) {
@@ -84,13 +84,11 @@ public class SucursalController {
             service.eliminar(id);
             return ResponseEntity.ok("Sucursal eliminada correctamente");
         } catch (Exception e) {
-            // ✅ Ahora devuelve correctamente el mensaje del service
             String mensaje = e.getMessage() != null ? e.getMessage() : "Error al eliminar la sucursal";
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(mensaje);
         }
     }
 
-    // Método auxiliar para validar rol admin
     private boolean tieneRolAdmin(Authentication auth) {
         return auth != null && auth.getAuthorities().stream()
                 .anyMatch(a -> a.getAuthority().equalsIgnoreCase("ROLE_ADMIN"));

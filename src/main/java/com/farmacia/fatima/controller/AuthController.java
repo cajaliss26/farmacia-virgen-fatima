@@ -21,7 +21,7 @@ public class AuthController {
         this.usuarioService = usuarioService;
     }
 
-    // 🔹 Registro
+    // Registro
     @PostMapping("/register")
     public ResponseEntity<?> registrar(@Valid @RequestBody RegisterRequest request) {
         Usuario usuario = new Usuario();
@@ -39,14 +39,14 @@ public class AuthController {
         return ResponseEntity.ok(response);
     }
 
-    // 🔹 Login: devuelve tokens JWT
+    // Login tokens JWT
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest request) {
         LoginResponse response = authService.login(request);
         return ResponseEntity.ok(response);
     }
 
-    // 🔹 Refresh: genera nuevos tokens si el anterior caducó
+    // Refresh
     @PostMapping("/refresh")
     public ResponseEntity<LoginResponse> refresh(@RequestBody RefreshTokenRequest request) {
         try {

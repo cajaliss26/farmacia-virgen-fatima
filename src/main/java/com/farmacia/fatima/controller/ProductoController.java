@@ -22,7 +22,7 @@ public class ProductoController {
         this.service = service;
     }
 
-    // GET /api/productos - Listar todos
+    // GET
     @GetMapping
     public ResponseEntity<List<ProductoResponse>> listar() {
         var lista = service.listar().stream()
@@ -42,7 +42,7 @@ public class ProductoController {
         }
     }
 
-    // POST /api/productos - Crear nuevo (solo admin)
+    // POST
     @PostMapping
     public ResponseEntity<?> crear(@RequestBody ProductoRequest req, Authentication auth) {
         if (!tieneRolAdmin(auth)) {
@@ -72,7 +72,7 @@ public class ProductoController {
         }
     }
 
-    // DELETE /api/productos/{id} - Eliminar (solo admin)
+    // DELETE
     @DeleteMapping("/{id}")
     public ResponseEntity<?> eliminar(@PathVariable Long id, Authentication auth) {
         if (!tieneRolAdmin(auth)) {
@@ -102,13 +102,12 @@ public class ProductoController {
         }
     }
 
-    // Método auxiliar para validar rol admin
     private boolean tieneRolAdmin(Authentication auth) {
         return auth != null && auth.getAuthorities().stream()
                 .anyMatch(a -> a.getAuthority().equalsIgnoreCase("ROLE_ADMIN"));
     }
 
-    // Conversión a DTO de respuesta
+
     private ProductoResponse toResponse(Producto p) {
         return new ProductoResponse(
                 p.getId(),

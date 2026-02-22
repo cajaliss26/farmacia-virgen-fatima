@@ -40,7 +40,7 @@ public class ProductoService {
                 .orElseThrow(() -> new RuntimeException("Producto no encontrado con ID: " + id));
     }
 
-    // 🔹 Crear nuevo producto
+    // Crear nuevo producto
     public Producto crear(ProductoRequest request) {
         if (request.categoriaId() == null || request.sucursalId() == null) {
             throw new IllegalArgumentException("Debe especificar IDs válidos de categoría y sucursal");
@@ -63,7 +63,7 @@ public class ProductoService {
         return productoRepository.save(producto);
     }
 
-    // 🔹 Actualizar producto existente
+    // Actualizar producto existente
     public Producto actualizar(Long id, ProductoRequest request) {
         Producto producto = buscarPorId(id);
 
@@ -82,7 +82,7 @@ public class ProductoService {
         return productoRepository.save(producto);
     }
 
-    // 🔹 Eliminar producto
+    // Eliminar producto
     public void eliminar(Long id) {
         if (!productoRepository.existsById(id)) {
             throw new RuntimeException("Producto no encontrado con ID: " + id);
@@ -90,7 +90,7 @@ public class ProductoService {
         productoRepository.deleteById(id);
     }
 
-    // 🔹 Cambiar estado activo/inactivo
+    // Cambiar estado activo/inactivo
     public Producto cambiarEstado(Long id) {
         Producto producto = buscarPorId(id);
         producto.setActivo(!producto.getActivo());

@@ -7,15 +7,12 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-/**
- * Repositorio para operaciones de base de datos con Reservas
- */
 public interface ReservaRepository extends JpaRepository<Reserva, Long> {
     
     // Buscar todas las reservas de un usuario específico
     List<Reserva> findByUsuarioId(Long usuarioId);
     
-    // Buscar reservas por sucursal
+    // Buscar reservas
     List<Reserva> findBySucursalId(Long sucursalId);
     
     // Buscar reservas de un usuario en una sucursal específica

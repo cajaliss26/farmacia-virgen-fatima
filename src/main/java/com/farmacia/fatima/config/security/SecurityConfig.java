@@ -47,24 +47,20 @@ public class SecurityConfig {
                         ).permitAll()
 
                         // ========== CATÁLOGO PÚBLICO ==========
-                        // Cualquiera puede ver productos y sucursales
                         .requestMatchers(
                                 "/api/catalogo/**",
                                 "/api/sucursales/**"
                         ).permitAll()
 
                         // ========== RESERVAS (USUARIOS AUTENTICADOS) ==========
-                        // Clientes pueden hacer y ver sus reservas
                         .requestMatchers(
                                 "/api/reservas/**",
                                 "/api/carrito/**",
                                 "/api/pedidos/**"
                         ).authenticated()
 
-                        // ========== API REST (AUTENTICADO) ==========
                         .requestMatchers("/api/**").authenticated()
 
-                        // ========== TODO LO DEMÁS ==========
                         .anyRequest().permitAll()
                 )
                 .addFilterBefore(jwtAuthenticationFilter,

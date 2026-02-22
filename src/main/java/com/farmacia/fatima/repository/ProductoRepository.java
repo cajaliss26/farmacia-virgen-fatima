@@ -10,10 +10,8 @@ public interface ProductoRepository extends JpaRepository<Producto, Long> {
 
     // Buscar solo productos activos
     List<Producto> findByActivoTrue();
-
     // Buscar productos activos de una sucursal
     List<Producto> findBySucursalIdAndActivoTrue(Long sucursalId);
-
     // Buscar productos activos de una categoría
     List<Producto> findByCategoriaIdAndActivoTrue(Long categoriaId);
 }

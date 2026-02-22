@@ -11,7 +11,7 @@ import java.util.List;
 public class SucursalService {
 
     private final SucursalRepository repository;
-    private final ReservaRepository reservaRepository; // ✅ NUEVO
+    private final ReservaRepository reservaRepository;
 
     public SucursalService(SucursalRepository repository, ReservaRepository reservaRepository) {
         this.repository = repository;
@@ -46,11 +46,11 @@ public class SucursalService {
         return repository.save(s);
     }
 
-    // ✅ Eliminación con validación de dependencias
+    // Eliminación con validación de dependencias
     public void eliminar(Long id) throws Exception {
         Sucursal sucursal = buscarPorId(id);
 
-        // 🔸 Verificar si existen reservas asociadas
+        // Verificar si existen reservas asociadas
         boolean tieneReservas = reservaRepository.existsBySucursalId(id);
         if (tieneReservas) {
             throw new Exception("No se puede eliminar la sucursal: tiene reservas asociadas.");

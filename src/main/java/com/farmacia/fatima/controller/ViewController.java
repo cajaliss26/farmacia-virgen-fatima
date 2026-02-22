@@ -41,8 +41,6 @@ public class ViewController {
     @GetMapping("/dashboard-cliente/carrito")
     public String carrito() { return "carrito"; }
 
-
-    // Atajos
     @GetMapping("/catalogo")    public String aliasCatalogo()  { return "catalogo-productos"; }
     @GetMapping("/reservas")    public String aliasReservas()  { return "reservas-cliente"; }
     @GetMapping("/boleta-demo") public String boletaDemo()     { return "boleta"; }

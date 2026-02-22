@@ -5,10 +5,6 @@ import com.farmacia.fatima.model.dto.SucursalResponse;
 
 import java.util.List;
 
-/**
- * Interfaz del servicio de catálogo
- * Proporciona métodos para consultar productos y sucursales disponibles
- */
 public interface CatalogoService {
     
     // Listar todos los productos activos del catálogo

@@ -91,17 +91,17 @@ public class ReporteController {
             @RequestParam String hasta) {
 
         try {
-            // 🔹 Convertir las fechas del query param a LocalDateTime
+            // Convertir las fechas del query param a LocalDateTime
             LocalDateTime ini = LocalDate.parse(desde).atStartOfDay();
             LocalDateTime fin = LocalDate.parse(hasta).atTime(23, 59, 59);
 
-            // 🔹 Ejecutar la consulta en el repositorio
+            // Ejecutar la consulta en el repositorio
             List<Object[]> resultados = pedidoRepo.resumen(ini, fin);
 
             BigDecimal totalVentas = BigDecimal.ZERO;
             Long totalPedidos = 0L;
 
-            // 🔹 Validar y mapear resultados
+            // Validar y mapear resultados
             if (!resultados.isEmpty()) {
                 Object[] fila = resultados.get(0);
 
@@ -116,12 +116,12 @@ public class ReporteController {
                 }
             }
 
-            // 🔹 Calcular ticket promedio
+            // Calcular ticket promedio
             BigDecimal ticketPromedio = totalPedidos > 0
                     ? totalVentas.divide(BigDecimal.valueOf(totalPedidos), 2, RoundingMode.HALF_UP)
                     : BigDecimal.ZERO;
 
-            // 🔹 Construir respuesta JSON
+            // Construir respuesta JSON
             Map<String, Object> respuesta = Map.of(
                     "totalVentas", totalVentas,
                     "totalPedidos", totalPedidos,

@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         fetch(`/api/reportes/ventas-por-sucursal${q}`, {headers}).then(r=>r.json())
       ]);
 
-      // ✅ Resumen con manejo de null
+      // Resumen con manejo de null
       const total = Number(resumen.totalVentas ?? 0);
       const pedidos = Number(resumen.totalPedidos ?? 0); // ✅ plural correcto
       const ticket = Number(resumen.ticketPromedio ?? 0);
@@ -96,7 +96,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       document.getElementById('resumen-box').textContent =
         `Ventas: S/ ${total.toFixed(2)} · Pedidos: ${pedidos} · Ticket: S/ ${ticket.toFixed(2)}`;
 
-      // 📊 Ventas por día
+      // Ventas por día
       const labelsDia = vd.map(x => x.fecha);
       const dataDia   = vd.map(x => x.total);
       ventasDiaChart?.destroy();
@@ -106,7 +106,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         options: { responsive: true, plugins:{legend:{display:false}} }
       });
 
-      // 📦 Top productos
+      //  Top productos
       const labelsTop = top.map(x => x.label);
       const dataTop   = top.map(x => x.valor);
       topProdChart?.destroy();
@@ -116,7 +116,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         options: { responsive: true, plugins:{legend:{display:false}} }
       });
 
-      // 🏬 Ventas por sucursal
+      // Ventas por sucursal
       const labelsSuc = suc.map(x => x.label || 'Sin sucursal');
       const dataSuc   = suc.map(x => x.valor);
       sucChart?.destroy();

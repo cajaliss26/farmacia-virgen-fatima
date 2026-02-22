@@ -34,39 +34,37 @@ public class ReservaServiceImpl implements ReservaService {
 
     @Override
     public ReservaResponse crearReserva(Long usuarioId, ReservaRequest request) {
-        // 1️⃣ Validar usuario
+        //  Validar usuario
         Usuario usuario = usuarioRepository.findById(usuarioId)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
 
-        // 2️⃣ Validar sucursal
+        //  Validar sucursal
         Sucursal sucursal = sucursalRepository.findById(request.sucursalId())
                 .orElseThrow(() -> new RuntimeException("Sucursal no encontrada con ID: " + request.sucursalId()));
 
-        // 3️⃣ Validar coherencia de horarios
+        // Validar coherencia de horarios
         if (request.horaFin().isBefore(request.horaInicio()) || request.horaFin().equals(request.horaInicio())) {
             throw new RuntimeException("La hora de fin debe ser posterior a la hora de inicio");
         }
 
-        // 4️⃣ Calcular total automático (ejemplo: 4 soles por persona)
+        // 4️Calcular total automático (ejemplo: 4 soles por persona)
         BigDecimal precioPorPersona = new BigDecimal("4.00");
         BigDecimal total = precioPorPersona.multiply(BigDecimal.valueOf(request.numeroPersonas()));
 
-        // 5️⃣ Crear la entidad Reserva con los nuevos campos
+        // 5️Crear la entidad Reserva con los nuevos campos
         Reserva reserva = Reserva.builder()
                 .usuario(usuario)
                 .sucursal(sucursal)
                 .fechaReserva(request.fechaReserva())
                 .horaInicio(request.horaInicio())
                 .horaFin(request.horaFin())
-                .numeroPersonas(request.numeroPersonas())
+                //.numeroPersonas(request.numeroPersonas())
                 .estado(Reserva.EstadoReserva.PENDIENTE)
-                .total(total)
                 .build();
 
-        // 6️⃣ Guardar en base de datos
+
         Reserva reservaGuardada = reservaRepository.save(reserva);
 
-        // 7️⃣ Retornar la respuesta DTO
         return convertirAResponse(reservaGuardada);
     }
 
@@ -109,7 +107,7 @@ public class ReservaServiceImpl implements ReservaService {
                 .collect(Collectors.toList());
     }
 
-    // 🔹 Conversión a DTO
+    // Conversión a DTO
     private ReservaResponse convertirAResponse(Reserva r) {
         return new ReservaResponse(
                 r.getId(),
@@ -121,9 +119,7 @@ public class ReservaServiceImpl implements ReservaService {
                 r.getFechaReserva(),
                 r.getHoraInicio(),
                 r.getHoraFin(),
-                r.getNumeroPersonas(),
-                r.getEstado().name(),
-                r.getTotal()
+                r.getEstado().name()
         );
     }
 }

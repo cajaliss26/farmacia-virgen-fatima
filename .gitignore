@@ -12,5 +12,5 @@
 .DS_Store
 Thumbs.db
 
-# Application config sensible (si quieres protegerlo)
+# Application
 application-local.yml
